@@ -8,5 +8,5 @@ Description of files:
 
 ### __Basics__
 
-- :point_right: 01 01_MNIST_Example.py<br/>
+- :point_right: 01_MNIST_Example.py<br/>
   Downloading MNIST Dataset and plotting sample images
