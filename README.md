@@ -10,3 +10,5 @@ Description of files:
 
 - :point_right: 01_MNIST_Example.py<br/>
   Downloading MNIST Dataset and plotting sample images
+- :point_right: 02_DL_Sequential.py<br/>
+  Creating Sequential Model using Tensorflow 
