@@ -20,25 +20,29 @@ def display_sample_images(examples, labels):
 
     plt.show()
 
-# tensorflow.keras.Sequential
-seq_model = tensorflow.keras.Sequential(
-    [
-        # Image input size = 28 * 28
-        Input(shape=(28,28,1)),
-        Conv2D(32, (3,3), activation='relu'),
-        Conv2D(64, (3,3), activation='relu'),
-        MaxPool2D(),
-        BatchNormalization(),
+# functional approach : function that returns a model
+# In here, input needs to be set. Out put from previous layer needs to be input of the next layer.
+# For example, my_input has become the input of next Convolutional layer.
+def functional_model():
 
-        Conv2D(128, (3,3), activation='relu'),
-        MaxPool2D(),
-        BatchNormalization(),
+    my_input = Input(shape=(28,28,1))
+    x = Conv2D(32, (3,3), activation='relu')(my_input)
+    x = Conv2D(64, (3,3), activation='relu')(x)
+    x = MaxPool2D()(x)
+    x = BatchNormalization()(x)
 
-        GlobalAvgPool2D(),
-        Dense(64, activation='relu'),
-        Dense(10, activation='softmax')
-    ]
-)
+    x = Conv2D(128, (3,3), activation='relu')(x)
+    x = MaxPool2D()(x)
+    x = BatchNormalization()(x)
+
+    x = GlobalAvgPool2D()(x)
+    x = Dense(64, activation='relu')(x)
+    x = Dense(10, activation='softmax')(x)
+
+    # This line is different from sequential approach
+    model = tensorflow.keras.Model(inputs=my_input, outputs=x)
+
+    return model
 
 if __name__ =='__main__':
     
@@ -64,19 +68,19 @@ if __name__ =='__main__':
     print("x_test.shape = ", x_test.shape)
     print("y_test.shape = ", y_test.shape)
 
-    seq_model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics='accuracy')
-    # We used spare_categorical_crossentropy because we didn't perform one-hot-encoding on labels
-    # Otherwise, we could've used categorical_crossentropy
-    # Just need to add the following two lines for categorical_crossentropy
-    # y_train = tensorflow.keras.utils.to_categorical(y_train, 10)
-    # y_test = tensorflow.keras.utils.to_categorical(y_test, 10)
+    # One hot encoding
+    y_train = tensorflow.keras.utils.to_categorical(y_train, 10)
+    y_test = tensorflow.keras.utils.to_categorical(y_test, 10)
+
+    model = functional_model()
+    model.compile(optimizer='adam', loss='categorical_crossentropy', metrics='accuracy')
 
 
     # model training
-    seq_model.fit(x_train, y_train, batch_size=64, epochs=5, validation_split=0.2)
+    model.fit(x_train, y_train, batch_size=64, epochs=2, validation_split=0.2)
 
     # Evaluation on test set
-    seq_model.evaluate(x_test, y_test, batch_size=64)
+    model.evaluate(x_test, y_test, batch_size=64)
 
 
 
