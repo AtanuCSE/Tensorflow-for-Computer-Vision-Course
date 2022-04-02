@@ -7,6 +7,7 @@ Tutorial link: [TensorFlow for Computer Vision Course - Full Python Tutorial for
 Description of files:
 
 ### __Basics__
+#### Three types of model creation. Three models are same. But the approaches are different. Sequential, Functional, and Class Inheritance. 
 
 - :point_right: 01_MNIST_Example.py<br/>
   Downloading MNIST Dataset and plotting sample images
@@ -15,4 +16,4 @@ Description of files:
 - :point_right: 03_DL_Functional_Approach.py<br/>
   Creating a model within method/function
 - :point_right: 04_DL_Class_Inherit_Approach.py<br/>
-  Creating model by inheriting tensorflow.kera.model class 
+  Creating model by inheriting tensorflow.kera.model class
