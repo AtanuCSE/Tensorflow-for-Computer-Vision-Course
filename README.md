@@ -18,8 +18,8 @@ Description of files:
 - :point_right: 04_DL_Class_Inherit_Approach.py<br/>
   Creating model by inheriting tensorflow.kera.model class
 - :point_right: 05_German_Traffic_Sign_No_Test_Only_Val.py<br/>
-  German Street Sign detection using functional model
-  Dataset is taken from Kaggle
-  Dataset is designed in folder by folder structure
-  It's converted into trainable data
+  German Street Sign detection using functional model<br/>
+  Dataset is taken from Kaggle<br/>
+  Dataset is designed in folder by folder structure<br/>
+  It's converted into trainable data<br/>
   This file contains mechanism up to validation, not testing.
